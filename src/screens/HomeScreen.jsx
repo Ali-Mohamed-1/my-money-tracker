@@ -2,7 +2,7 @@ import { useAppContext, selectTotalBalance } from '../state/AppContext';
 import SourceCard from '../components/SourceCard';
 import './HomeScreen.css';
 
-export default function HomeScreen() {
+export default function HomeScreen({ onSourceClick }) {
   const { state } = useAppContext();
   const totalBalance = selectTotalBalance(state.sources);
 
@@ -23,7 +23,7 @@ export default function HomeScreen() {
 
       <section className="sources-list">
         {state.sources.map((source) => (
-          <SourceCard key={source.id} source={source} />
+          <SourceCard key={source.id} source={source} onCardClick={() => onSourceClick(source.id)} />
         ))}
       </section>
     </div>

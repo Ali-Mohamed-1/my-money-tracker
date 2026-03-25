@@ -1,0 +1,56 @@
+.source-details-screen {
+  display: flex;
+  flex-direction: column;
+}
+
+.source-details-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: var(--surface);
+  padding: 16px;
+  border-radius: var(--radius);
+  border: var(--border-width) solid var(--border);
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--shadow);
+  margin-bottom: 24px;
+}
+
+.back-btn {
+  margin-top: 4px;
+}
+
+.source-info-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+}
+
+.icon-wrapper {
+  font-size: 2.5rem;
+  line-height: 1;
+  background: var(--bg);
+  padding: 12px;
+  border-radius: 50%;
+  border: var(--border-width) solid var(--border);
+}
+
+.text-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.source-name-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.source-balance-badge {
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+/* Reused history-content styles from HistoryScreen.css */

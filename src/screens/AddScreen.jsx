@@ -35,6 +35,17 @@ export default function AddScreen({ onSuccess }) {
       return;
     }
 
+    // Balance check — only for expenses
+    if (type === 'expense') {
+      const source = state.sources.find(s => s.id === sourceId);
+      if (source && Number(amount) > source.balance) {
+        setError(
+          `الرصيد غير كافٍ في "${source.nameAr}" — الرصيد الحالي: ${source.balance.toLocaleString('ar-EG', { minimumFractionDigits: 2 })} ج.م`
+        );
+        return;
+      }
+    }
+
     // Build and dispatch transaction
     const newTx = createTransaction({
       title,

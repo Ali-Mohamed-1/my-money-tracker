@@ -3,7 +3,7 @@ import { useAppContext, ADD_TRANSACTION, createTransaction } from '../state/AppC
 import { Edit, Check } from './icons';
 import './SourceCard.css';
 
-export default function SourceCard({ source }) {
+export default function SourceCard({ source, onCardClick }) {
   const { dispatch } = useAppContext();
   const [isEditing, setIsEditing] = useState(false);
   const [newVal, setNewVal] = useState(source.balance.toString());
@@ -32,7 +32,7 @@ export default function SourceCard({ source }) {
       dispatch({ type: ADD_TRANSACTION, payload: newTx });
     }
     
-    setNewVal(num.toString()); // Re-sync val
+    setNewVal(num.toString());
     setIsEditing(false);
   };
 
@@ -45,8 +45,17 @@ export default function SourceCard({ source }) {
     }
   };
 
+  const handleEditClick = (e) => {
+    e.stopPropagation(); // Don't trigger card navigation
+    setIsEditing(true);
+  };
+
   return (
-    <div className="card source-card">
+    <div
+      className="card source-card"
+      onClick={!isEditing ? onCardClick : undefined}
+      style={{ cursor: isEditing ? 'default' : 'pointer' }}
+    >
       <div className="source-icon">{source.icon}</div>
       <div className="source-info">
         <h3 className="source-name">{source.nameAr}</h3>
@@ -55,7 +64,7 @@ export default function SourceCard({ source }) {
       
       <div className="source-balance-container">
         {isEditing ? (
-          <div className="edit-mode">
+          <div className="edit-mode" onClick={e => e.stopPropagation()}>
             <input
               ref={inputRef}
               type="number"
@@ -76,7 +85,7 @@ export default function SourceCard({ source }) {
             <span className="source-balance amount-md">
               {source.balance.toLocaleString('ar-EG', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </span>
-            <button className="icon-btn edit-btn" onClick={() => setIsEditing(true)}>
+            <button className="icon-btn edit-btn" onClick={handleEditClick}>
               <Edit />
             </button>
           </div>

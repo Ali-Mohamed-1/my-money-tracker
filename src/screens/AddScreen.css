@@ -1,39 +1,43 @@
 .add-screen {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  flex: 1;
+  gap: 12px;
 }
 
 .screen-title {
   text-align: center;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 800;
   margin-top: 0;
-  margin-bottom: 2px;
+  margin-bottom: 8px;
   color: var(--text);
+  flex-shrink: 0;
 }
 
 .add-form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: max(12px, 1.5vh);
+  flex: 1;
 }
 
 /* ─── Toggle Buttons ─────────────────────────────────────────────────────────── */
 .type-toggle {
   display: flex;
-  gap: 8px;
+  gap: 12px;
   background: var(--surface);
-  padding: 4px;
+  padding: 6px;
   border-radius: var(--radius);
   border: var(--border-width) solid var(--border);
   box-shadow: 2px 2px 0 var(--shadow);
+  flex-shrink: 0;
 }
 
 .toggle-btn {
   flex: 1;
-  padding: 8px;
-  font-size: 1rem;
+  padding: 10px;
+  font-size: 1.1rem;
   font-weight: 800;
   border: none;
   background: transparent;
@@ -101,14 +105,15 @@
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
+  flex-shrink: 0;
 }
 
 .form-group input,
 .form-group select {
   font-family: var(--font);
-  font-size: 0.95rem;
-  padding: 8px;
+  font-size: 1.1rem;
+  padding: 12px;
   border: var(--border-width) solid var(--border);
   border-radius: var(--radius);
   background: var(--surface);
@@ -132,7 +137,7 @@
 
 .amount-group input {
   width: 100%;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   font-weight: 800;
   padding-left: 50px; /* leaves room for currency text */
 }
@@ -169,11 +174,11 @@
 
 /* ─── Submit Button ──────────────────────────────────────────────────────────── */
 .btn-submit {
-  margin-top: 0px;
+  margin-top: auto; /* Pushes to bottom */
   font-family: var(--font);
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   font-weight: 800;
-  padding: 10px;
+  padding: 14px;
   background: var(--dark-card-bg);
   color: var(--dark-card-fg);
   border: var(--border-width) solid var(--border);

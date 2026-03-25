@@ -1,13 +1,18 @@
 import { useMemo } from 'react';
-import { useAppContext, DELETE_TRANSACTION } from '../state/AppContext';
-import './HistoryScreen.css';
+import { useAppContext, selectSourceById, selectTransactionsBySource, DELETE_TRANSACTION } from '../state/AppContext';
+import { ArrowRight } from '../components/icons';
+import './HistoryScreen.css'; // Reusing transaction list styles
+import './SourceDetailsScreen.css';
 
-export default function HistoryScreen() {
+export default function SourceDetailsScreen({ sourceId, onBack }) {
   const { state, dispatch } = useAppContext();
+  
+  const source = selectSourceById(state.sources, sourceId);
+  const sourceTransactions = selectTransactionsBySource(state.transactions, sourceId);
 
   // Sort transactions by date descending, then by creation date descending
   const sortedTransactions = useMemo(() => {
-    return [...state.transactions].sort((a, b) => {
+    return [...sourceTransactions].sort((a, b) => {
       const db = new Date(b.date);
       const da = new Date(a.date);
       if (db.getTime() === da.getTime()) {
@@ -15,17 +20,12 @@ export default function HistoryScreen() {
       }
       return db - da;
     });
-  }, [state.transactions]);
+  }, [sourceTransactions]);
 
   const handleDelete = (id) => {
     if (window.confirm('هل أنت متأكد من حذف هذه المعاملة؟')) {
       dispatch({ type: DELETE_TRANSACTION, payload: id });
     }
-  };
-
-  const getSourceName = (id) => {
-    const s = state.sources.find(s => s.id === id);
-    return s ? `${s.icon} ${s.nameAr}` : 'غير معروف';
   };
 
   const formatDate = (isoString) => {
@@ -39,17 +39,41 @@ export default function HistoryScreen() {
     });
   };
 
+  if (!source) {
+    return (
+      <div className="screen source-details-screen">
+        <header className="screen-header row-header">
+          <button className="icon-btn back-btn" onClick={onBack}>
+            <ArrowRight />
+          </button>
+          <h1 className="screen-title">المصدر غير موجود</h1>
+        </header>
+      </div>
+    );
+  }
+
   return (
-    <div className="screen history-screen">
-      <header className="screen-header">
-        <h1 className="screen-title">المعاملات</h1>
+    <div className="screen source-details-screen">
+      <header className="source-details-header">
+        <button className="icon-btn back-btn" onClick={onBack}>
+          <ArrowRight />
+        </button>
+        <div className="source-info-header">
+          <div className="icon-wrapper">{source.icon}</div>
+          <div className="text-wrapper">
+            <h1 className="source-name-title">{source.nameAr}</h1>
+            <div className="source-balance-badge amount-md">
+              {source.balance.toLocaleString('ar-EG', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ج.م
+            </div>
+          </div>
+        </div>
       </header>
 
       <div className="history-content">
         {sortedTransactions.length === 0 ? (
           <div className="empty-state">
             <h2 className="empty-title">لا توجد معاملات</h2>
-            <p className="empty-text">قم بإضافة معاملات جديدة لتظهر هنا</p>
+            <p className="empty-text">لم تقم بأي معاملات من خلال هذا الحساب</p>
           </div>
         ) : (
           <div className="transaction-list">
@@ -58,7 +82,6 @@ export default function HistoryScreen() {
                 <div className="tx-main">
                   <div className="tx-details">
                     <h3 className="tx-title">{tx.title}</h3>
-                    <span className="tx-source">{getSourceName(tx.sourceId)}</span>
                     <span className="tx-date">{formatDate(tx.date)}</span>
                   </div>
                   <div className={`tx-amount ${tx.type === 'income' ? 'income-text' : 'expense-text'}`}>
