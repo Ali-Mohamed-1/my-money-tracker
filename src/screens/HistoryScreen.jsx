@@ -5,16 +5,11 @@ import './HistoryScreen.css';
 export default function HistoryScreen() {
   const { state, dispatch } = useAppContext();
 
-  // Sort transactions by date descending, then by creation date descending
+  // Sort by creation time descending (newest added = first shown)
   const sortedTransactions = useMemo(() => {
-    return [...state.transactions].sort((a, b) => {
-      const db = new Date(b.date);
-      const da = new Date(a.date);
-      if (db.getTime() === da.getTime()) {
-        return new Date(b.createdAt) - new Date(a.createdAt);
-      }
-      return db - da;
-    });
+    return [...state.transactions].sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
   }, [state.transactions]);
 
   const handleDelete = (id) => {
