@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useAppContext, ADD_TRANSACTION, createTransaction } from '../state/AppContext';
-import { Edit, Check } from './icons';
+import { Edit, Check, SourceIcon } from './icons';
 import './SourceCard.css';
 
 export default function SourceCard({ source, onCardClick }) {
@@ -56,7 +56,7 @@ export default function SourceCard({ source, onCardClick }) {
       onClick={!isEditing ? onCardClick : undefined}
       style={{ cursor: isEditing ? 'default' : 'pointer' }}
     >
-      <div className="source-icon">{source.icon}</div>
+      <div className="source-icon"><SourceIcon iconKey={source.icon} size={24} /></div>
       <div className="source-info">
         <h3 className="source-name">{source.nameAr}</h3>
         <span className="label">الرصيد</span>

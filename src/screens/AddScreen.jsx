@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAppContext, ADD_TRANSACTION, createTransaction } from '../state/AppContext';
+import { SourceIcon } from '../components/icons';
 import './AddScreen.css';
 
 export default function AddScreen({ onSuccess }) {
@@ -126,7 +127,7 @@ export default function AddScreen({ onSuccess }) {
                 className={`source-btn ${sourceId === s.id ? 'active' : ''}`}
                 onClick={() => setSourceId(s.id)}
               >
-                <span className="source-btn-icon">{s.icon}</span>
+                <span className="source-btn-icon"><SourceIcon iconKey={s.icon} size={20} /></span>
                 <span className="source-btn-name">{s.nameAr}</span>
               </button>
             ))}

@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useAppContext, selectSourceById, selectTransactionsBySource, DELETE_TRANSACTION } from '../state/AppContext';
-import { ArrowRight } from '../components/icons';
+import { ArrowRight, SourceIcon } from '../components/icons';
 import './HistoryScreen.css'; // Reusing transaction list styles
 import './SourceDetailsScreen.css';
 
@@ -54,7 +54,7 @@ export default function SourceDetailsScreen({ sourceId, onBack }) {
           <ArrowRight />
         </button>
         <div className="source-info-header">
-          <div className="icon-wrapper">{source.icon}</div>
+          <div className="icon-wrapper"><SourceIcon iconKey={source.icon} size={28} /></div>
           <div className="text-wrapper">
             <h1 className="source-name-title">{source.nameAr}</h1>
             <div className="source-balance-badge amount-md">

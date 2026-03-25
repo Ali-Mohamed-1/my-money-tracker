@@ -1,5 +1,6 @@
 import { useAppContext, selectTotalBalance } from '../state/AppContext';
 import SourceCard from '../components/SourceCard';
+import { Warning } from '../components/icons';
 import './HomeScreen.css';
 
 export default function HomeScreen({ onSourceClick }) {
@@ -10,7 +11,7 @@ export default function HomeScreen({ onSourceClick }) {
     <div className="screen home-screen">
       {state.storageError && (
         <div className="storage-banner">
-          ⚠️ تعذر حفظ البيانات. سيتم مسحها عند إغلاق التطبيق.
+          <Warning size={18} style={{ verticalAlign: 'middle', marginLeft: '6px' }} /> تعذر حفظ البيانات. سيتم مسحها عند إغلاق التطبيق.
         </div>
       )}
 

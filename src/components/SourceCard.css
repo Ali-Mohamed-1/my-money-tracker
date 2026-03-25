@@ -6,7 +6,6 @@
 }
 
 .source-icon {
-  font-size: 1.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,7 +16,7 @@
   border-radius: 50%;
   box-shadow: 2px 2px 0 var(--border);
   flex-shrink: 0;
-  line-height: 1;
+  color: var(--text-muted);
 }
 
 .source-info {
@@ -43,9 +42,7 @@
   gap: 8px;
 }
 
-.source-balance {
-  /* Inherits from amount-md */
-}
+
 
 .edit-mode {
   display: flex;

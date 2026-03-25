@@ -19,9 +19,9 @@ const VALID_SOURCE_IDS = ['src_ewallet', 'src_visa', 'src_cash'];
 function buildDefaultSources() {
   const now = new Date().toISOString();
   return [
-    { id: 'src_ewallet', nameAr: 'محفظة إلكترونية', icon: '📱', balance: 0, createdAt: now },
-    { id: 'src_visa',    nameAr: 'فيزا',             icon: '💳', balance: 0, createdAt: now },
-    { id: 'src_cash',    nameAr: 'نقدي',             icon: '💵', balance: 0, createdAt: now },
+    { id: 'src_ewallet', nameAr: 'محفظة إلكترونية', icon: 'ewallet', balance: 0, createdAt: now },
+    { id: 'src_visa',    nameAr: 'فيزا',             icon: 'visa',    balance: 0, createdAt: now },
+    { id: 'src_cash',    nameAr: 'نقدي',             icon: 'cash',    balance: 0, createdAt: now },
   ];
 }
 

@@ -20,7 +20,7 @@ export default function HistoryScreen() {
 
   const getSourceName = (id) => {
     const s = state.sources.find(s => s.id === id);
-    return s ? `${s.icon} ${s.nameAr}` : 'غير معروف';
+    return s ? s.nameAr : 'غير معروف';
   };
 
   const formatDate = (isoString) => {
