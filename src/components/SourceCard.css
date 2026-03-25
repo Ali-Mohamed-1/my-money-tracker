@@ -1,0 +1,36 @@
+.source-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 16px;
+}
+
+.source-icon {
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  box-shadow: 2px 2px 0 var(--border);
+}
+
+.source-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.source-name {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.source-balance {
+  text-align: left;
+}
