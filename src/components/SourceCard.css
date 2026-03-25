@@ -6,16 +6,18 @@
 }
 
 .source-icon {
-  font-size: 2rem;
+  font-size: 1.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 48px;
   height: 48px;
   background: var(--bg);
-  border: 2px solid var(--border);
+  border: var(--border-width) solid var(--border);
   border-radius: 50%;
   box-shadow: 2px 2px 0 var(--border);
+  flex-shrink: 0;
+  line-height: 1;
 }
 
 .source-info {
@@ -31,6 +33,66 @@
   color: var(--text);
 }
 
-.source-balance {
+.source-balance-container {
   text-align: left;
+}
+
+.view-mode {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.source-balance {
+  /* Inherits from amount-md */
+}
+
+.edit-mode {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.balance-edit-input {
+  font-family: var(--font);
+  font-size: 1.2rem;
+  font-weight: 800;
+  padding: 6px 8px;
+  width: 100px;
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  background: #fff;
+  color: var(--text);
+  text-align: left;
+  direction: ltr; /* Keeps numbers easier to edit */
+}
+
+.balance-edit-input:focus {
+  outline: none;
+  box-shadow: 2px 2px 0 var(--shadow);
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.icon-btn:hover, .icon-btn:active {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.check-btn {
+  color: var(--income);
+}
+.check-btn:hover, .check-btn:active {
+  color: var(--income);
 }

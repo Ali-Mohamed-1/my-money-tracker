@@ -1,0 +1,201 @@
+.add-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.screen-title {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-top: 0;
+  margin-bottom: 2px;
+  color: var(--text);
+}
+
+.add-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ─── Toggle Buttons ─────────────────────────────────────────────────────────── */
+.type-toggle {
+  display: flex;
+  gap: 8px;
+  background: var(--surface);
+  padding: 4px;
+  border-radius: var(--radius);
+  border: var(--border-width) solid var(--border);
+  box-shadow: 2px 2px 0 var(--shadow);
+}
+
+.toggle-btn {
+  flex: 1;
+  padding: 8px;
+  font-size: 1rem;
+  font-weight: 800;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  border-radius: calc(var(--radius) - 2px);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.toggle-btn.active {
+  color: var(--surface);
+}
+
+.toggle-btn.active.expense {
+  background: var(--expense);
+}
+
+.toggle-btn.active.income {
+  background: var(--income);
+}
+
+/* ─── Source Buttons ─────────────────────────────────────────────────────────── */
+.source-toggle {
+  display: flex;
+  gap: 8px;
+}
+
+.source-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 6px 4px;
+  background: var(--surface);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 2px 2px 0 var(--shadow);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font);
+}
+
+.source-btn.active {
+  background: var(--text);
+  color: var(--surface);
+  box-shadow: none;
+  transform: translate(2px, 2px);
+}
+
+.source-btn-icon {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.source-btn-name {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ─── Form Inputs ────────────────────────────────────────────────────────────── */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-group input,
+.form-group select {
+  font-family: var(--font);
+  font-size: 0.95rem;
+  padding: 8px;
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 2px 2px 0 var(--shadow);
+  transition: box-shadow 0.2s ease, transform 0.1s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  box-shadow: 4px 4px 0 var(--shadow);
+  transform: translateY(-2px);
+}
+
+.amount-group .input-with-currency {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.amount-group input {
+  width: 100%;
+  font-size: 1.1rem;
+  font-weight: 800;
+  padding-left: 50px; /* leaves room for currency text */
+}
+
+.amount-group .currency {
+  position: absolute;
+  left: 14px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+
+/* ─── Select Dropdown (Unused now but kept for safety) ─ */
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper::after {
+  content: '▼';
+  font-size: 0.8rem;
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text);
+  pointer-events: none;
+}
+
+.select-wrapper select {
+  width: 100%;
+  appearance: none;
+  padding-left: 40px;
+}
+
+/* ─── Submit Button ──────────────────────────────────────────────────────────── */
+.btn-submit {
+  margin-top: 0px;
+  font-family: var(--font);
+  font-size: 1.15rem;
+  font-weight: 800;
+  padding: 10px;
+  background: var(--dark-card-bg);
+  color: var(--dark-card-fg);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--shadow);
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+.btn-submit:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--shadow);
+}
+
+/* ─── Error Message ──────────────────────────────────────────────────────────── */
+.error-banner {
+  background: #FFF3CD;
+  color: var(--expense);
+  padding: 12px;
+  border-radius: var(--radius);
+  border: 2px solid var(--expense);
+  font-weight: 700;
+  text-align: center;
+  font-size: 0.95rem;
+}

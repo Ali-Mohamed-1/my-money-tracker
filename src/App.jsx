@@ -1,5 +1,4 @@
 import { Home, PlusCircle, List } from './components/icons';
-import { useAppContext } from './state/AppContext';
 import HomeScreen from './screens/HomeScreen';
 import AddScreen from './screens/AddScreen';
 import HistoryScreen from './screens/HistoryScreen';
@@ -15,7 +14,6 @@ const TABS = [
 
 function AppShell() {
   const [activeTab, setActiveTab] = useState('home');
-  const { state } = useAppContext();
 
   const renderScreen = () => {
     switch (activeTab) {

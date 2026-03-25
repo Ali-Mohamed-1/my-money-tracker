@@ -1,0 +1,122 @@
+.history-screen {
+  display: flex;
+  flex-direction: column;
+}
+
+.history-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 80px; /* space for bottom nav */
+}
+
+.empty-state {
+  text-align: center;
+  margin-top: 40px;
+  padding: 32px;
+  background: var(--surface);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+}
+
+.empty-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.empty-text {
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+
+.transaction-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.transaction-card {
+  background: var(--surface);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 2px 2px 0 var(--shadow);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tx-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.tx-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tx-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.tx-source {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.tx-date {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.tx-amount {
+  font-size: 1.2rem;
+  font-weight: 800;
+  font-family: var(--font);
+}
+
+.income-text {
+  color: var(--income);
+}
+
+.expense-text {
+  color: var(--expense);
+}
+
+.tx-actions {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 2px dashed var(--border);
+  padding-top: 8px;
+  margin-top: 4px;
+}
+
+.del-btn {
+  background: var(--expense);
+  color: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  padding: 4px 12px;
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--shadow);
+  transition: all 0.2s ease;
+}
+
+.del-btn:active {
+  box-shadow: none;
+  transform: translate(2px, 2px);
+}

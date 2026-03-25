@@ -15,7 +15,7 @@
  *       No separate balance calculation pass is needed.
  */
 
-import { LOAD_DATA, ADD_TRANSACTION, SET_STORAGE_ERROR } from './actions';
+import { LOAD_DATA, ADD_TRANSACTION, DELETE_TRANSACTION, SET_STORAGE_ERROR } from './actions';
 
 // ─── Initial State ────────────────────────────────────────────────────────────
 
@@ -78,6 +78,37 @@ export function reducer(state, action) {
     }
 
     /**
+     * DELETE_TRANSACTION
+     * Removes the transaction AND inverses the affected source's balance.
+     */
+    case DELETE_TRANSACTION: {
+      const id = action.payload;
+      const tx = state.transactions.find(t => t.id === id);
+      if (!tx) return state;
+
+      const updatedSources = state.sources.map((source) => {
+        if (source.id !== tx.sourceId) return source;
+
+        // Inverse the operation: removing an income decreases balance, removing expense increases balance
+        const delta = tx.type === 'income' ? -tx.amount : tx.amount;
+
+        return {
+          ...source,
+          balance: round2(source.balance + delta),
+        };
+      });
+
+      const updatedTransactions = state.transactions.filter(t => t.id !== id);
+
+      return {
+        ...state,
+        sources: updatedSources,
+        transactions: updatedTransactions,
+      };
+    }
+
+    /**
+
      * SET_STORAGE_ERROR
      * Updates the storageError flag at runtime (e.g. after a failed save).
      *

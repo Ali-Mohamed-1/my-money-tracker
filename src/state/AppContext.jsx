@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 /**
  * AppContext.jsx — Global React Context + Provider
  *
@@ -12,7 +13,7 @@
 
 import { createContext, useContext, useReducer, useEffect } from 'react';
 import { reducer, initialState } from './reducer';
-import { LOAD_DATA, ADD_TRANSACTION, SET_STORAGE_ERROR } from './actions';
+import { LOAD_DATA, ADD_TRANSACTION, DELETE_TRANSACTION, SET_STORAGE_ERROR } from './actions';
 import { getData, saveData } from '../utils/storage';
 
 // ─── Context ──────────────────────────────────────────────────────────────────
@@ -81,7 +82,7 @@ export function createTransaction({ title, amount, type, sourceId, date }) {
   };
 }
 
-export { ADD_TRANSACTION, LOAD_DATA, SET_STORAGE_ERROR };
+export { ADD_TRANSACTION, DELETE_TRANSACTION, LOAD_DATA, SET_STORAGE_ERROR };
 
 // ─── Selectors (Derived — never stored in state) ──────────────────────────────
 
