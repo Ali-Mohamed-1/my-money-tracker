@@ -27,3 +27,74 @@
   flex-direction: column;
   gap: 16px;
 }
+
+.add-source-card {
+  background: var(--surface-light);
+  border: 2px dashed var(--border);
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-secondary);
+}
+
+.add-source-card:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--surface);
+}
+
+.add-icon-wrapper {
+  background: var(--surface);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-text {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.add-source-form {
+  background: var(--surface);
+  border: 2px solid var(--primary);
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.add-source-input {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--border);
+  font-size: 1.2rem;
+  padding: 8px 0;
+  color: var(--text-primary);
+  width: 100%;
+}
+
+.add-source-input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.add-source-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.success-btn {
+  color: var(--income);
+}

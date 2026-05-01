@@ -1,12 +1,22 @@
-import { useMemo } from 'react';
-import { useAppContext, selectSourceById, selectTransactionsBySource, DELETE_TRANSACTION } from '../state/AppContext';
-import { ArrowRight, SourceIcon } from '../components/icons';
+import { useMemo, useState } from 'react';
+import { 
+  useAppContext, 
+  selectSourceById, 
+  selectTransactionsBySource, 
+  DELETE_TRANSACTION,
+  UPDATE_SOURCE,
+  DELETE_SOURCE
+} from '../state/AppContext';
+import { ArrowRight, SourceIcon, Edit, Trash, Check } from '../components/icons';
 import './HistoryScreen.css'; // Reusing transaction list styles
 import './SourceDetailsScreen.css';
 
 export default function SourceDetailsScreen({ sourceId, onBack }) {
   const { state, dispatch } = useAppContext();
   
+  const [isEditing, setIsEditing] = useState(false);
+  const [editName, setEditName] = useState('');
+
   const source = selectSourceById(state.sources, sourceId);
   const sourceTransactions = selectTransactionsBySource(state.transactions, sourceId);
 
@@ -17,10 +27,28 @@ export default function SourceDetailsScreen({ sourceId, onBack }) {
     );
   }, [sourceTransactions]);
 
-  const handleDelete = (id) => {
+  const handleDeleteTx = (id) => {
     if (window.confirm('هل أنت متأكد من حذف هذه المعاملة؟')) {
       dispatch({ type: DELETE_TRANSACTION, payload: id });
     }
+  };
+
+  const handleDeleteSource = () => {
+    if (window.confirm(`هل أنت متأكد من حذف مصدر "${source.nameAr}"؟\nسيتم حذف جميع المعاملات المرتبطة به!`)) {
+      dispatch({ type: DELETE_SOURCE, payload: sourceId });
+      onBack();
+    }
+  };
+
+  const handleStartEdit = () => {
+    setEditName(source.nameAr);
+    setIsEditing(true);
+  };
+
+  const handleSaveEdit = () => {
+    if (!editName.trim()) return;
+    dispatch({ type: UPDATE_SOURCE, payload: { id: sourceId, nameAr: editName.trim() } });
+    setIsEditing(false);
   };
 
   const formatDate = (isoString) => {
@@ -50,13 +78,33 @@ export default function SourceDetailsScreen({ sourceId, onBack }) {
   return (
     <div className="screen source-details-screen">
       <header className="source-details-header">
-        <button className="icon-btn back-btn" onClick={onBack}>
-          <ArrowRight />
-        </button>
+        <div className="header-top">
+          <button className="icon-btn back-btn" onClick={onBack}>
+            <ArrowRight />
+          </button>
+          <div className="header-actions">
+            <button className="icon-btn" onClick={handleStartEdit}><Edit size={20} /></button>
+            <button className="icon-btn danger-btn" onClick={handleDeleteSource}><Trash size={20} /></button>
+          </div>
+        </div>
+
         <div className="source-info-header">
           <div className="icon-wrapper"><SourceIcon iconKey={source.icon} size={28} /></div>
           <div className="text-wrapper">
-            <h1 className="source-name-title">{source.nameAr}</h1>
+            {isEditing ? (
+              <div className="edit-name-form">
+                <input 
+                  className="edit-name-input"
+                  value={editName}
+                  onChange={(e) => setEditName(e.target.value)}
+                  autoFocus
+                />
+                <button className="icon-btn success-btn" onClick={handleSaveEdit}><Check /></button>
+                <button className="icon-btn" onClick={() => setIsEditing(false)}>×</button>
+              </div>
+            ) : (
+              <h1 className="source-name-title">{source.nameAr}</h1>
+            )}
             <div className="source-balance-badge amount-md">
               {source.balance.toLocaleString('ar-EG', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ج.م
             </div>
@@ -84,7 +132,7 @@ export default function SourceDetailsScreen({ sourceId, onBack }) {
                   </div>
                 </div>
                 <div className="tx-actions">
-                  <button className="del-btn" onClick={() => handleDelete(tx.id)}>حذف</button>
+                  <button className="del-btn" onClick={() => handleDeleteTx(tx.id)}>حذف</button>
                 </div>
               </div>
             ))}

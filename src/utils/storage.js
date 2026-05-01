@@ -46,22 +46,17 @@ function isStorageAvailable() {
  * - Keeps only known source IDs (guards against schema drift)
  */
 function sanitizeSources(parsed) {
-  const defaults = buildDefaultSources();
+  if (!Array.isArray(parsed) || parsed.length === 0) {
+    return buildDefaultSources();
+  }
 
-  return defaults.map((def) => {
-    const found = Array.isArray(parsed)
-      ? parsed.find((s) => s.id === def.id)
-      : null;
-
-    if (!found) return def;
-
-    return {
-      ...def,
-      balance: typeof found.balance === 'number' && !isNaN(found.balance)
-        ? found.balance
-        : 0,
-    };
-  });
+  return parsed.map((s) => ({
+    id: s.id,
+    nameAr: s.nameAr || 'مصدر غير معروف',
+    icon: s.icon || 'cash',
+    balance: typeof s.balance === 'number' && !isNaN(s.balance) ? s.balance : 0,
+    createdAt: s.createdAt || new Date().toISOString()
+  }));
 }
 
 // ─── Transaction Sanitizer ────────────────────────────────────────────────────

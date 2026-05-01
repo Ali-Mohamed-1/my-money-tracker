@@ -15,7 +15,15 @@
  *       No separate balance calculation pass is needed.
  */
 
-import { LOAD_DATA, ADD_TRANSACTION, DELETE_TRANSACTION, SET_STORAGE_ERROR } from './actions';
+import { 
+  LOAD_DATA, 
+  ADD_TRANSACTION, 
+  DELETE_TRANSACTION, 
+  SET_STORAGE_ERROR,
+  ADD_SOURCE,
+  DELETE_SOURCE,
+  UPDATE_SOURCE
+} from './actions';
 
 // ─── Initial State ────────────────────────────────────────────────────────────
 
@@ -108,7 +116,53 @@ export function reducer(state, action) {
     }
 
     /**
+     * ADD_SOURCE
+     * Adds a new money source.
+     * payload: { nameAr, icon }
+     */
+    case ADD_SOURCE: {
+      const { nameAr, icon } = action.payload;
+      const newSource = {
+        id: `src_${Date.now()}`,
+        nameAr,
+        icon: icon || 'cash',
+        balance: 0,
+        createdAt: new Date().toISOString()
+      };
+      return {
+        ...state,
+        sources: [...state.sources, newSource],
+      };
+    }
 
+    /**
+     * DELETE_SOURCE
+     * Removes a source and ALL its transactions.
+     * payload: sourceId
+     */
+    case DELETE_SOURCE: {
+      const sourceId = action.payload;
+      return {
+        ...state,
+        sources: state.sources.filter(s => s.id !== sourceId),
+        transactions: state.transactions.filter(t => t.sourceId !== sourceId),
+      };
+    }
+
+    /**
+     * UPDATE_SOURCE
+     * Updates source name.
+     * payload: { id, nameAr }
+     */
+    case UPDATE_SOURCE: {
+      const { id, nameAr } = action.payload;
+      return {
+        ...state,
+        sources: state.sources.map(s => s.id === id ? { ...s, nameAr } : s),
+      };
+    }
+
+    /**
      * SET_STORAGE_ERROR
      * Updates the storageError flag at runtime (e.g. after a failed save).
      *

@@ -5,7 +5,7 @@
 
 .source-details-header {
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
   gap: 16px;
   background: var(--surface);
   padding: 16px;
@@ -13,6 +13,43 @@
   border: var(--border-width) solid var(--border);
   box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--shadow);
   margin-bottom: 24px;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.danger-btn {
+  color: var(--expense);
+}
+
+.edit-name-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.edit-name-input {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--primary);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+  padding: 4px 0;
+  width: 150px;
+}
+
+.edit-name-input:focus {
+  outline: none;
 }
 
 .back-btn {
